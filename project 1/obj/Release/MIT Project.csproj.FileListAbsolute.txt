@@ -1,0 +1,6 @@
+C:\Users\Benuka\Documents\Visual Studio 2015\Projects\project 1\project 1\bin\Release\project 1.exe.config
+C:\Users\Benuka\Documents\Visual Studio 2015\Projects\project 1\project 1\obj\Release\MIT Project.csprojResolveAssemblyReference.cache
+C:\Users\Benuka\Documents\Visual Studio 2015\Projects\project 1\project 1\obj\Release\project_1.MainWindow.resources
+C:\Users\Benuka\Documents\Visual Studio 2015\Projects\project 1\project 1\obj\Release\project_1.Properties.Resources.resources
+C:\Users\Benuka\Documents\Visual Studio 2015\Projects\project 1\project 1\obj\Release\project_1.test.resources
+C:\Users\Benuka\Documents\Visual Studio 2015\Projects\project 1\project 1\obj\Release\MIT Project.csproj.GenerateResource.Cache
