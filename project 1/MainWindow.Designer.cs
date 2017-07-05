@@ -42,6 +42,7 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pnl_AppDetail = new System.Windows.Forms.Panel();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -262,7 +263,6 @@
             this.pictureBox59 = new System.Windows.Forms.PictureBox();
             this.pictureBox62 = new System.Windows.Forms.PictureBox();
             this.pnlAnalyse = new System.Windows.Forms.Panel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label74 = new System.Windows.Forms.Label();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
@@ -385,7 +385,6 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(176, 22);
             this.textBox5.TabIndex = 42;
-            this.textBox5.TextChanged += new System.EventHandler(this.radioButton3_Click);
             this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             this.textBox5.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox5_KeyUp);
             // 
@@ -537,6 +536,8 @@
             // pnl_AppDetail
             // 
             this.pnl_AppDetail.BackColor = System.Drawing.Color.LightYellow;
+            this.pnl_AppDetail.Controls.Add(this.textBox5);
+            this.pnl_AppDetail.Controls.Add(this.listBox1);
             this.pnl_AppDetail.Controls.Add(this.pictureBox22);
             this.pnl_AppDetail.Controls.Add(this.panel2);
             this.pnl_AppDetail.Controls.Add(this.pictureBox33);
@@ -545,14 +546,24 @@
             this.pnl_AppDetail.Controls.Add(this.pictureBox21);
             this.pnl_AppDetail.Controls.Add(this.pictureBox20);
             this.pnl_AppDetail.Controls.Add(this.label5);
-            this.pnl_AppDetail.Controls.Add(this.textBox5);
             this.pnl_AppDetail.Controls.Add(this.label11);
             this.pnl_AppDetail.Location = new System.Drawing.Point(300, 192);
             this.pnl_AppDetail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnl_AppDetail.Name = "pnl_AppDetail";
-            this.pnl_AppDetail.Size = new System.Drawing.Size(1125, 580);
+            this.pnl_AppDetail.Size = new System.Drawing.Size(1168, 580);
             this.pnl_AppDetail.TabIndex = 60;
             this.pnl_AppDetail.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(891, 24);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(176, 4);
+            this.listBox1.TabIndex = 82;
+            this.listBox1.Click += new System.EventHandler(this.listBox1_Click);
             // 
             // pictureBox22
             // 
@@ -566,7 +577,7 @@
             this.pictureBox22.TabIndex = 82;
             this.pictureBox22.TabStop = false;
             this.pictureBox22.Visible = false;
-            this.pictureBox22.Click += new System.EventHandler(this.pictureBox22_Click_1);
+            this.pictureBox22.Click += new System.EventHandler(this.pictureBox33_MouseHover);
             this.pictureBox22.MouseLeave += new System.EventHandler(this.pictureBox22_MouseLeave);
             // 
             // panel2
@@ -2100,7 +2111,7 @@
             this.pnlThresold.Location = new System.Drawing.Point(300, 192);
             this.pnlThresold.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlThresold.Name = "pnlThresold";
-            this.pnlThresold.Size = new System.Drawing.Size(1128, 587);
+            this.pnlThresold.Size = new System.Drawing.Size(1135, 587);
             this.pnlThresold.TabIndex = 70;
             // 
             // pictureBox48
@@ -2431,6 +2442,7 @@
             this.comboBox8.Name = "comboBox8";
             this.comboBox8.Size = new System.Drawing.Size(197, 24);
             this.comboBox8.TabIndex = 83;
+            this.comboBox8.SelectedIndexChanged += new System.EventHandler(this.comboBox8_SelectedIndexChanged);
             // 
             // label62
             // 
@@ -2541,7 +2553,7 @@
             this.pnlExamHalls.Location = new System.Drawing.Point(300, 192);
             this.pnlExamHalls.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlExamHalls.Name = "pnlExamHalls";
-            this.pnlExamHalls.Size = new System.Drawing.Size(1136, 583);
+            this.pnlExamHalls.Size = new System.Drawing.Size(1168, 583);
             this.pnlExamHalls.TabIndex = 77;
             this.pnlExamHalls.Visible = false;
             // 
@@ -2745,7 +2757,7 @@
             this.pnlAppList.Location = new System.Drawing.Point(300, 192);
             this.pnlAppList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlAppList.Name = "pnlAppList";
-            this.pnlAppList.Size = new System.Drawing.Size(1136, 583);
+            this.pnlAppList.Size = new System.Drawing.Size(1165, 583);
             this.pnlAppList.TabIndex = 84;
             this.pnlAppList.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAppList_Paint);
             // 
@@ -3243,30 +3255,19 @@
             // pnlAnalyse
             // 
             this.pnlAnalyse.BackColor = System.Drawing.Color.LightYellow;
-            this.pnlAnalyse.Controls.Add(this.listBox1);
             this.pnlAnalyse.Controls.Add(this.comboBox5);
             this.pnlAnalyse.Controls.Add(this.label74);
             this.pnlAnalyse.Controls.Add(this.comboBox4);
             this.pnlAnalyse.Controls.Add(this.label71);
             this.pnlAnalyse.Controls.Add(this.comboBox3);
             this.pnlAnalyse.Controls.Add(this.label70);
-            this.pnlAnalyse.Location = new System.Drawing.Point(300, 153);
+            this.pnlAnalyse.Location = new System.Drawing.Point(300, 192);
             this.pnlAnalyse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlAnalyse.Name = "pnlAnalyse";
             this.pnlAnalyse.Size = new System.Drawing.Size(1168, 623);
             this.pnlAnalyse.TabIndex = 86;
             this.pnlAnalyse.Visible = false;
             this.pnlAnalyse.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlAnalyse_Paint);
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(877, 10);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(159, 20);
-            this.listBox1.TabIndex = 82;
             // 
             // comboBox5
             // 
@@ -3352,14 +3353,14 @@
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImage = global::project_1.Properties.Resources.backneww;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1515, 786);
-            this.Controls.Add(this.pnlAnalyse);
+            this.ClientSize = new System.Drawing.Size(1473, 786);
+            this.Controls.Add(this.pnl_AppDetail);
             this.Controls.Add(this.pnlAppList);
             this.Controls.Add(this.pnlExamHalls);
-            this.Controls.Add(this.pnl_AppDetail);
-            this.Controls.Add(this.pnlLogin);
             this.Controls.Add(this.pnlThresold);
             this.Controls.Add(this.pnlResults);
+            this.Controls.Add(this.pnlLogin);
+            this.Controls.Add(this.pnlAnalyse);
             this.Controls.Add(this.pnlAcademicYear);
             this.Controls.Add(this.pnlButonsAdmin);
             this.Controls.Add(this.pnladduser);

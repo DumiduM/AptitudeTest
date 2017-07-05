@@ -247,6 +247,7 @@ namespace project_1
             IT = "";
 
 
+
             try
             {
                 if (conn.connection().State == System.Data.ConnectionState.Closed)
@@ -364,6 +365,7 @@ namespace project_1
                 }
                 conn.closeConnection();
                 read4.Close();
+                
             }
             catch (Exception ex)
             {
@@ -380,6 +382,7 @@ namespace project_1
                 conn.connection().Open();
             try
             {
+                listBox1.Items.Add("");
                 int count = 0;
                 conn.connection();
                 MySqlCommand command = new MySqlCommand("select ALIndex from applicant where ALIndex like @0", conn.connection());
@@ -392,7 +395,7 @@ namespace project_1
                     count++;
 
                 }
-                listBox1.Height = count * 16;
+                listBox1.Height = (count+1) * 16;
 
                 conn.closeConnection();
                 read3.Close();
@@ -1394,16 +1397,6 @@ namespace project_1
             }
         }
 
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox6_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
         {
             if (radioButton1.Checked == true)
@@ -1433,17 +1426,12 @@ namespace project_1
 
             if (e.KeyCode == Keys.Return)
 
-                fillApplicant(listBox1.Items[0].ToString());
+                fillApplicant(listBox1.Items[1].ToString());
         }
 
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
             listBox1.Items.Clear();
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void listBox1_MouseClick(object sender, MouseEventArgs e)
@@ -1470,11 +1458,6 @@ namespace project_1
                 radioButton3.Checked = false;
                 check2 = 0;
             }
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void checkBox5_CheckedChanged_1(object sender, EventArgs e)
@@ -1571,6 +1554,17 @@ namespace project_1
         private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void listBox1_Click(object sender, EventArgs e)
+        {
+            clearApplicant();
+            fillApplicant(listBox1.Items[listBox1.SelectedIndex].ToString());
+        }
+
+        private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //this.dataGridResults.Sort(this.co, ListSortDirection.Descending);
         }
     }
 
