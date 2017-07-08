@@ -75,6 +75,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Queries\Login.cs" />
+    <Compile Include="Queries\CheckQualifiedApplicant.cs" />
     <Compile Include="Queries\TresholdDetails.cs" />
     <Compile Include="Queries\UserDetails.cs" />
     <Compile Include="Queries\ApplicantDetails.cs" />

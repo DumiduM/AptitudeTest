@@ -577,7 +577,7 @@
             this.pictureBox22.TabIndex = 82;
             this.pictureBox22.TabStop = false;
             this.pictureBox22.Visible = false;
-            this.pictureBox22.Click += new System.EventHandler(this.pictureBox33_MouseHover);
+            this.pictureBox22.Click += new System.EventHandler(this.pictureBox22_Click_1);
             this.pictureBox22.MouseLeave += new System.EventHandler(this.pictureBox22_MouseLeave);
             // 
             // panel2
@@ -867,7 +867,7 @@
             // 
             // textBox13
             // 
-            this.textBox13.Location = new System.Drawing.Point(143, 10);
+            this.textBox13.Location = new System.Drawing.Point(144, 10);
             this.textBox13.Margin = new System.Windows.Forms.Padding(4);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(89, 22);

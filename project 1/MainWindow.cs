@@ -21,6 +21,7 @@ namespace project_1
         ExamHallDetails editHall = new ExamHallDetails();
         UserDetails editUser = new UserDetails();
         TresholdDetails editTreshold = new TresholdDetails();
+        CheckQualifiedApplicant checkQualification = new CheckQualifiedApplicant();
 
         MySqlDataAdapter adap;
         DataSet ds;
@@ -35,9 +36,10 @@ namespace project_1
         private string maths = "";
         private string chem = "";
         private string IT = "";
-        //private string t;
+        private int physicalChecked = 0;
 
-
+        
+        
         public MainWindow()
         {
 
@@ -56,6 +58,7 @@ namespace project_1
             hidePanels();
             pnlButonsAdmin.Visible = false;
             //MessageBox.Show(comboBox1.GetItemText([1]));
+            
 
         }
 
@@ -901,12 +904,22 @@ namespace project_1
                     textBox31.Text.ToString(),
                     Convert.ToInt32(textBox9.Text.ToString()),
                     Convert.ToInt32(comboBox2.SelectedItem));
+
+                if (radioButton2.Checked == true)
+                {
+                    physicalChecked = 1;
+                }
+                else
+                    physicalChecked = 0;
+
+                 
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show("Error : " + ex);
             }
+            checkQualification.checkApplicant(physicalChecked, textBox13.ToString(), textBox14.ToString(), textBox15.ToString(), textBox9.ToString(), comboAcademicYr.SelectedItem.ToString());
 
         }
 
@@ -1427,6 +1440,7 @@ namespace project_1
             if (e.KeyCode == Keys.Return)
 
                 fillApplicant(listBox1.Items[1].ToString());
+            listBox1.Visible = true;
         }
 
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
@@ -1560,6 +1574,7 @@ namespace project_1
         {
             clearApplicant();
             fillApplicant(listBox1.Items[listBox1.SelectedIndex].ToString());
+            listBox1.Visible = false;
         }
 
         private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)

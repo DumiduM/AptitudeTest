@@ -51,14 +51,17 @@ namespace project_1
                 insertCommand.ExecuteNonQuery();
                 insertCommand.Dispose();
                 conn.closeConnection();
+
+                MessageBox.Show("Saved Succesfully");
             }
             catch (MySqlException ex)
             {
                 if (ex.Number == 1062)
                 {
-                    if (MessageBox.Show("Do you want to save changes?", "Update", MessageBoxButtons.YesNo) == DialogResult.Yes) { }
-                    updateApplicant(title, fname, sname, nic, year, address, tel_no, district, alcertificate, alindex, olcertificate, certifyinvoice, zscore, IT, genEng, bio, physic, chem, cMath, yearAL, yearOL, math, eng, olindex);
-
+                    if (MessageBox.Show("Do you want to save changes?", "Update", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        updateApplicant(title, fname, sname, nic, year, address, tel_no, district, alcertificate, alindex, olcertificate, certifyinvoice, zscore, IT, genEng, bio, physic, chem, cMath, yearAL, yearOL, math, eng, olindex);
+                    }
                 }
                 else
                     MessageBox.Show("Error : " + ex);
@@ -104,7 +107,7 @@ namespace project_1
                 insertCommand.ExecuteNonQuery();
                 insertCommand.Dispose();
                 conn.closeConnection();
-
+                MessageBox.Show("Updated Succesfully");
             }
             catch (Exception ex)
             {
