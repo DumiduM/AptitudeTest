@@ -63,7 +63,7 @@ namespace project_1
                         updateApplicant(title, fname, sname, nic, year, address, tel_no, district, alcertificate, alindex, olcertificate, certifyinvoice, zscore, IT, genEng, bio, physic, chem, cMath, yearAL, yearOL, math, eng, olindex);
                     }
                 }
-                else
+                else if (ex.Number == 1062)
                     MessageBox.Show("Error : " + ex);
             }
 
@@ -161,17 +161,17 @@ namespace project_1
             {
                 MySqlCommand insertCommand = new MySqlCommand("update ugc_pref set p1=@1,p2=@2,p3=@3,p4=@4,p5=@5,p6=@6,p7=@7,p8=@8,p9=@9,ALindex=@10,pref=@11 where ALindex = @10", conn.connection());
 
-                insertCommand.Parameters.Add(new MySqlParameter("@0", p1));
-                insertCommand.Parameters.Add(new MySqlParameter("@1", p2));
-                insertCommand.Parameters.Add(new MySqlParameter("@2", p3));
-                insertCommand.Parameters.Add(new MySqlParameter("@3", p4));
-                insertCommand.Parameters.Add(new MySqlParameter("@4", p5));
-                insertCommand.Parameters.Add(new MySqlParameter("@5", p6));
-                insertCommand.Parameters.Add(new MySqlParameter("@6", p7));
-                insertCommand.Parameters.Add(new MySqlParameter("@7", p8));
-                insertCommand.Parameters.Add(new MySqlParameter("@8", p9));
-                insertCommand.Parameters.Add(new MySqlParameter("@9", alindex));
-                insertCommand.Parameters.Add(new MySqlParameter("@10", pref));
+                insertCommand.Parameters.Add(new MySqlParameter("@1", p1));
+                insertCommand.Parameters.Add(new MySqlParameter("@2", p2));
+                insertCommand.Parameters.Add(new MySqlParameter("@3", p3));
+                insertCommand.Parameters.Add(new MySqlParameter("@4", p4));
+                insertCommand.Parameters.Add(new MySqlParameter("@5", p5));
+                insertCommand.Parameters.Add(new MySqlParameter("@6", p6));
+                insertCommand.Parameters.Add(new MySqlParameter("@7", p7));
+                insertCommand.Parameters.Add(new MySqlParameter("@8", p8));
+                insertCommand.Parameters.Add(new MySqlParameter("@9", p9));
+                insertCommand.Parameters.Add(new MySqlParameter("@10", alindex));
+                insertCommand.Parameters.Add(new MySqlParameter("@11", pref));
 
                 insertCommand.ExecuteNonQuery();
                 insertCommand.Dispose();

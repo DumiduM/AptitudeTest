@@ -38,8 +38,8 @@ namespace project_1
         private string IT = "";
         private int physicalChecked = 0;
 
-        
-        
+
+
         public MainWindow()
         {
 
@@ -49,15 +49,15 @@ namespace project_1
 
             for (int i = 2014; i <= 2100; i++)
                 comboAcademicYr.Items.Add(i + "/" + (i + 1));
-
-
+            
 
             comboAcademicYr.SelectedItem = (Convert.ToInt32(DateTime.Today.Year.ToString()) - 1) + "/" + DateTime.Today.Year.ToString();
-
-
+            
             hidePanels();
             pnlButonsAdmin.Visible = false;
-            //MessageBox.Show(comboBox1.GetItemText([1]));
+
+
+
             
 
         }
@@ -919,7 +919,7 @@ namespace project_1
             {
                 MessageBox.Show("Error : " + ex);
             }
-            checkQualification.checkApplicant(physicalChecked, textBox13.ToString(), textBox14.ToString(), textBox15.ToString(), textBox9.ToString(), comboAcademicYr.SelectedItem.ToString());
+            checkQualification.checkApplicant(physicalChecked, textBox13.Text.ToString(), textBox14.Text.ToString(), textBox15.Text.ToString(), textBox9.Text.ToString(), comboAcademicYr.SelectedItem.ToString());
 
         }
 
@@ -1232,7 +1232,7 @@ namespace project_1
 
                 else
                 {
-                    editHall.addNewHall(textBox35.Text.ToString(), textBox41.Text.ToString(), Convert.ToInt32(textBox42.Text));
+                    editHall.addNewHall(textBox35.Text.ToString(), textBox41.Text.ToString(), Convert.ToInt32(textBox42.Text),Convert.ToInt32(textBox40.Text));
                     updateExamHallTable();
                 }
             }
@@ -1580,6 +1580,16 @@ namespace project_1
         private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
         {
             //this.dataGridResults.Sort(this.co, ListSortDirection.Descending);
+        }
+
+        private void label75_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox40_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

@@ -269,6 +269,8 @@
             this.label71 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label70 = new System.Windows.Forms.Label();
+            this.label75 = new System.Windows.Forms.Label();
+            this.textBox40 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
@@ -2587,6 +2589,8 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.label75);
+            this.panel5.Controls.Add(this.textBox40);
             this.panel5.Controls.Add(this.pictureBox27);
             this.panel5.Controls.Add(this.panel6);
             this.panel5.Controls.Add(this.label66);
@@ -3346,6 +3350,29 @@
             this.label70.TabIndex = 4;
             this.label70.Text = "Analyse by ";
             // 
+            // label75
+            // 
+            this.label75.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label75.AutoSize = true;
+            this.label75.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.8F);
+            this.label75.Location = new System.Drawing.Point(21, 14);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(57, 18);
+            this.label75.TabIndex = 78;
+            this.label75.Text = "Hall No";
+            this.label75.Click += new System.EventHandler(this.label75_Click);
+            // 
+            // textBox40
+            // 
+            this.textBox40.Location = new System.Drawing.Point(100, 11);
+            this.textBox40.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox40.Multiline = true;
+            this.textBox40.Name = "textBox40";
+            this.textBox40.Size = new System.Drawing.Size(121, 22);
+            this.textBox40.TabIndex = 77;
+            this.textBox40.TextChanged += new System.EventHandler(this.textBox40_TextChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -3354,9 +3381,9 @@
             this.BackgroundImage = global::project_1.Properties.Resources.backneww;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1473, 786);
+            this.Controls.Add(this.pnlExamHalls);
             this.Controls.Add(this.pnl_AppDetail);
             this.Controls.Add(this.pnlAppList);
-            this.Controls.Add(this.pnlExamHalls);
             this.Controls.Add(this.pnlThresold);
             this.Controls.Add(this.pnlResults);
             this.Controls.Add(this.pnlLogin);
@@ -3735,6 +3762,8 @@
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.Label label74;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.TextBox textBox40;
     }
 }
 

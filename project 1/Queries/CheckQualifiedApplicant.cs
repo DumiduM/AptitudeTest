@@ -13,27 +13,81 @@ namespace project_1
     class CheckQualifiedApplicant
     {
         DbConnect conn = new DbConnect();
-        private int examNo=100000;
+        private int examNo;
         private int NumberofHalls;
-        private int Numberofapplicant;
-        int capacity;
-        int HallNo;
+        int HallNo=0;
+        int applicants;
 
-        public void checkApplicant(int physicalchecked,string bioMaths, string physics, string chemIT,string ALIndex,string year)
+        public void updateHall(int i,string year,string ALIndex)
+        {
+            if (conn.connection().State == System.Data.ConnectionState.Closed)
+                conn.connection().Open();
+            try
+            {
+                MySqlCommand command = new MySqlCommand("select applicants from examhall where hallNo like @1", conn.connection());
+                command.Parameters.Add(new MySqlParameter("@1", i));
+                MySqlDataReader read2 = command.ExecuteReader();
+                try
+                {
+                    while (read2.Read())
+                    {
+                        applicants = Convert.ToInt32(read2[0]);
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex);
+                }
+                read2.Close();
+                
+                MySqlCommand insertCommand2 = new MySqlCommand("update examhall set applicants =@0 where HallNo = @1", conn.connection());
+
+                insertCommand2.Parameters.Add(new MySqlParameter("@0", applicants+1));
+                insertCommand2.Parameters.Add(new MySqlParameter("@1", i));
+                insertCommand2.ExecuteNonQuery();
+                insertCommand2.Dispose();
+                conn.closeConnection();
+
+                if (conn.connection().State == System.Data.ConnectionState.Closed)
+                    conn.connection().Open();
+
+                //inserting to DB
+                MySqlCommand insertCommand = new MySqlCommand("INSERT INTO qualifiedapplicants (ALIndex,ExamIndex,year,hallno) VALUES (@0,@1,@2,@3)", conn.connection());
+                insertCommand.Parameters.Add(new MySqlParameter("@0", ALIndex));
+                insertCommand.Parameters.Add(new MySqlParameter("@1", examNo));
+                insertCommand.Parameters.Add(new MySqlParameter("@2", year));
+                insertCommand.Parameters.Add(new MySqlParameter("@3", HallNo));
+
+                insertCommand.ExecuteNonQuery();
+                insertCommand.Dispose();
+                conn.closeConnection();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+        }
+
+        public void checkApplicant(int physicalchecked, string bioMaths, string physics, string chemIT, string ALIndex, string year)
         {
             if (conn.connection().State == System.Data.ConnectionState.Closed)
                 conn.connection().Open();
 
             try
             {
-                if ((physicalchecked == 1 && (bioMaths == "A" || bioMaths == "B" || bioMaths == "C") || physics == "A" || physics == "B" || physics == "C" || physics == "S") && (chemIT =="A" || chemIT == "B" || chemIT == "C" || chemIT == "S") ||
+                if ((physicalchecked == 1 && (bioMaths == "A" || bioMaths == "B" || bioMaths == "C") || physics == "A" || physics == "B" || physics == "C" || physics == "S") && (chemIT == "A" || chemIT == "B" || chemIT == "C" || chemIT == "S") ||
                     (physicalchecked == 1 && (bioMaths == "A" || bioMaths == "B" || bioMaths == "C" || bioMaths == "S") || physics == "A" || physics == "B" || physics == "C") && (chemIT == "A" || chemIT == "B" || chemIT == "C" || chemIT == "S") ||
                     (physicalchecked == 0 && (bioMaths == "A" || bioMaths == "B" || bioMaths == "C" || bioMaths == "S") || physics == "A" || physics == "B" || physics == "C") && (chemIT == "A" || chemIT == "B" || chemIT == "C" || chemIT == "S"))
                 {
-                    MessageBox.Show("ok");
+
                     //getting the exam no
                     conn.connection();
-                    MySqlCommand command = new MySqlCommand("Select ExamIndex from qualifiedapplicants where year like '"+year+"' order by ExamIndex desc limit 1 offset 1", conn.connection());
+                    MySqlCommand command = new MySqlCommand("Select ExamIndex from qualifiedapplicants where year = '" + year + "' order by ExamIndex desc limit 1", conn.connection());
                     MySqlDataReader read = command.ExecuteReader();
                     try
                     {
@@ -44,86 +98,52 @@ namespace project_1
                         examNo++;
                     }
 
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Error : " + ex);
+                        MessageBox.Show("Error 2 : " + ex);
                     }
                     read.Close();
 
 
-                    //getting number of hall allocated
-                    /*MySqlCommand command2 = new MySqlCommand("Select count(distinct HallNo) from `examhall`", conn.connection());
-                    MySqlDataReader read2 = command.ExecuteReader();
-                    try
-                    {
-                        while (read2.Read())
-                        {
-                            NumberofHalls = (Convert.ToInt32(read2["count(distinct HallNo)"]));
-                        } 
-                    }
-
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error : " + ex);
-                    }
-                    read2.Close();*/
-
-                    //getting number of applicant
-                    MySqlCommand command3 = new MySqlCommand("Select count(ExamIndex) from qualifiedapplicants", conn.connection());
-                    MySqlDataReader read3 = command.ExecuteReader();
-                    try
-                    {
-                        while (read3.Read())
-                        {
-                            Numberofapplicant = (Convert.ToInt32(read3["count(ExamIndex)"]));
-                        }
-                    }
-
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error : " + ex);
-                    }
-                    read3.Close();
 
 
 
+                    //getting hall count
+
+                    MySqlCommand command4 = new MySqlCommand("Select hallNo,capacity,applicants from examhall order by hallNo asc", conn.connection());
+                     var dt = new DataTable();
+                     dt.Load(command4.ExecuteReader());
+                     var halls = dt.AsEnumerable().ToArray();
+                     NumberofHalls = halls.Length;
 
 
-                    //getting number of applicant
-                    MySqlCommand command4 = new MySqlCommand("Select hallNo,capacity from examhall", conn.connection());
-                    var dt = new DataTable();
-                    dt.Load(command4.ExecuteReader());
-                    var rows = dt.AsEnumerable().ToArray();
-                    NumberofHalls = rows.Length;
-                   // rows[0]["id"];
+                    HallNo = 0;                 
                     for (int i = 0; i < NumberofHalls; i++)
                     {
-                        capacity = Convert.ToInt32(rows[i]["capacity"]);
-
-                        if (Numberofapplicant <= capacity)
+                        if (Convert.ToInt32(halls[i]["capacity"]) > Convert.ToInt32(halls[i]["applicants"]))
                         {
-                            HallNo = Convert.ToInt32(rows[i]["hallNo"]);
-                            break;
-                        }
-                    }
-                    
-                    //if (number)
+                            MessageBox.Show("loop in to hall number checked"+i);
 
-                    //insrting to DB
-                    MySqlCommand insertCommand = new MySqlCommand("INSERT INTO qualifiedapplicants (ALIndex,ExamIndex,year,hallno) VALUES (@0,@01,@2)", conn.connection());
-                    insertCommand.Parameters.Add(new MySqlParameter("@0", ALIndex));
-                    insertCommand.Parameters.Add(new MySqlParameter("@1", examNo));
-                    insertCommand.Parameters.Add(new MySqlParameter("@2", year));
-                    insertCommand.Parameters.Add(new MySqlParameter("@3", HallNo));
-                    insertCommand.ExecuteNonQuery();
-                    insertCommand.Dispose();
-                    conn.closeConnection();
+                            HallNo = i+1;
+                            updateHall(HallNo,year,ALIndex);
+                            MessageBox.Show(HallNo.ToString());
+                            break;
+
+                        }
+                        if (HallNo==0 && i == NumberofHalls - 1)
+                        {
+                            MessageBox.Show("No enough space in Hall to allocate");
+                        }
+                        
+                    }
+                    MessageBox.Show("APPLICANTS,NUNBER OF HALLS,hallNo" + applicants + " " + NumberofHalls +" "+HallNo);
+
                 }
             }
 
             catch(Exception ex)
             {
-
+                MessageBox.Show("Error 1 :"+ex);
             }
         }
 
